@@ -5,7 +5,7 @@ import Loading from '../Loading'
 import Product from './Product'
 import ReactPaginate from 'react-paginate'
 
-const Products = ({category}) => {
+const Products = ({category,sort}) => {
   const dispatch=useDispatch()
   const {products,productsStatus}=useSelector(state=>state.products)
 
@@ -41,7 +41,7 @@ const Products = ({category}) => {
       <>
         <div className='flex flex-wrap justify-around'>
           {
-            currentItems?.map((product,i) => (
+            currentItems?.sort((a,b)=>sort=="inc" ? a.price-b.price : sort=="dec" ? b.price-a.price : "" ).map((product,i) => (
               <Product key={i} product={product}/>
             ))
           }
